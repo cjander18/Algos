@@ -1,5 +1,0 @@
-C:\Users\Rumor\Documents\Blog\Code Examples\Delegates\Algorithms\Algorithms\bin\x64\Release\Algorithms.exe.config
-C:\Users\Rumor\Documents\Blog\Code Examples\Delegates\Algorithms\Algorithms\bin\x64\Release\Algorithms.exe
-C:\Users\Rumor\Documents\Blog\Code Examples\Delegates\Algorithms\Algorithms\bin\x64\Release\Algorithms.pdb
-C:\Users\Rumor\Documents\Blog\Code Examples\Delegates\Algorithms\Algorithms\obj\x64\Release\Algorithms.exe
-C:\Users\Rumor\Documents\Blog\Code Examples\Delegates\Algorithms\Algorithms\obj\x64\Release\Algorithms.pdb
