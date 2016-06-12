@@ -13,24 +13,66 @@ namespace Algorithms
 
         {
 
-            InsertionSort insertSort = new InsertionSort();
+            InsertionSort insertSort;
+            MergeSort mergeSort;
 
-            // Write the random array to the console
-            Console.WriteLine("Random Array:");
-            WriteArrayToConsole<int>(insertSort.intArrRandom);
+            // Wait for user to hit a key to continue
+            Console.WriteLine("Press 1 for Insertion Sort, 2 for MergeSort, and 3 to exit:");
 
-            // Sort the array
-            insertSort.SortArray();
+            string input = Console.ReadLine();
 
-            // Write the sorted array to the console
-            Console.WriteLine("Sorted Array:");
-            WriteArrayToConsole<int>(insertSort.intArrRandom);
+            if (Convert.ToInt32(input) == 1)
+
+            {
+
+                insertSort = new InsertionSort();
+
+                // Write the random array to the console
+                Console.WriteLine("Random Array:");
+                WriteArrayToConsole<int>(insertSort.intArrRandom);
                 
+                // Sort the array
+                insertSort.SortArray();
+
+                // Write the sorted array to the console
+                Console.WriteLine("Sorted Array:");
+                WriteArrayToConsole<int>(insertSort.intArrRandom);
+
+            }
+
+            else if (Convert.ToInt32(input) == 2)
+
+            {
+
+                mergeSort = new MergeSort();
+
+                // Write the random array to the console
+                Console.WriteLine("Random Array:");
+                WriteArrayToConsole<int>(mergeSort.intArrRandom);
+                
+                // Sort the array
+                mergeSort.SortArray();
+
+                // Write the sorted array to the console
+                Console.WriteLine("Sorted Array:");
+                WriteArrayToConsole<int>(mergeSort.intArrRandom);
+
+            }
+
+            else
+
+            {
+
+                // exit
+                return;
+
+            }
+
             // Wait for user to hit a key to continue
             Console.WriteLine("Press enter to close this window.");
 
             Console.ReadLine();
-
+            
         }
 
         /// <summary>
@@ -53,8 +95,7 @@ namespace Algorithms
                 Console.WriteLine(intValue);
 
             }
-
-
+            
         }
 
     }
