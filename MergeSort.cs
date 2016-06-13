@@ -71,7 +71,7 @@ namespace Algorithms
 
                 // Set the middle, note the usual calculation is (l+r)/2, but this
                 // will avoid overflow for large iL and iR
-                iM = iL + (iR - iL) / 2;
+                iM = (iL + iR) / 2;
 
                 // Start sorting this part of the array, looking only from the left to the middle
                 intArrSource = StartMergeSort(intArrSource, iL, iM);
