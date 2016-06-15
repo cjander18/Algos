@@ -4,18 +4,12 @@ namespace Algorithms
 
 {
 
-    public class MergeSort
+    public class MergeSort : ISort
 
     {
 
-        /// <summary>
-        /// A random class variable used to populate the array
-        /// </summary>
-        private Random rand = new Random();
-
-        /// <summary>
-        /// A random array of integers
-        /// </summary>
+        public string Name { get; set; }
+        public Random rand { get; set; }
         public int[] intArrRandom { get; set; }
 
         /// <summary>
@@ -24,7 +18,20 @@ namespace Algorithms
         public MergeSort()
 
         {
+            
+            Name = "Merge Sort";
 
+            rand = new Random();
+            
+        }
+
+        /// <summary>
+        /// Initalize the random array
+        /// </summary>
+        public void InitalizeArray()
+
+        {
+            
             // Create an array with a random length
             intArrRandom = new int[rand.Next(2, 100)];
 
@@ -32,14 +39,14 @@ namespace Algorithms
             for (int i = 0; i < intArrRandom.Length; i++)
 
             {
-            
+
                 // Put a random number in it
                 intArrRandom[i] = rand.Next(0, 100);
 
             }
 
         }
-        
+
         /// <summary>
         /// Start sorting the random array
         /// </summary>
@@ -108,7 +115,7 @@ namespace Algorithms
             // one since arrays are zero based.
             int iLeftLength = iM - iL + 1;
 
-            // The right array will be from the middle to the right side (so substracting the
+            // The right array will be from the middle to the right side (so subtracting the
             // middle removes the entire left side
             int iRightLength = iR - iM;
 

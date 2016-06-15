@@ -8,18 +8,22 @@ namespace Algorithms
 
 {
 
-    class InsertionSort
+    public class InsertionSort : ISort
 
     {
 
-        private Random rand = new Random();
-
+        public string Name { get; set;}
+        public Random rand { get; set; }
         public int[] intArrRandom { get; set; }
 
         // Initalize the integer array with random values
         public InsertionSort()
 
         {
+            
+            Name = "Insertion Sort";
+
+            rand = new Random();
 
             // Create an array with a random length
             intArrRandom = new int[rand.Next(0, 100)];
@@ -30,6 +34,28 @@ namespace Algorithms
             {
                 // Put a random number in it
                 intArrRandom[i] = rand.Next(0, 100);
+            }
+
+        }
+
+        /// <summary>
+        /// Initalize the random array
+        /// </summary>
+        public void InitalizeArray()
+
+        {
+
+            // Create an array with a random length
+            intArrRandom = new int[rand.Next(2, 100)];
+
+            // For each place in the array
+            for (int i = 0; i < intArrRandom.Length; i++)
+
+            {
+
+                // Put a random number in it
+                intArrRandom[i] = rand.Next(0, 100);
+
             }
 
         }

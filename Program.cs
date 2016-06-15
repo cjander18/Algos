@@ -13,65 +13,75 @@ namespace Algorithms
 
         {
 
-            InsertionSort insertSort;
-            MergeSort mergeSort;
+            string strDirections = "\r\nType 'exit' at any time to close the program.\r\n";
+            string strUserInput = "";
+            int iSelectedAlgorithm;
+            bool bValidNumber;
 
-            // Wait for user to hit a key to continue
-            Console.WriteLine("Press 1 for Insertion Sort, 2 for MergeSort, and 3 to exit:");
+            ISort sortSelected;
 
-            string input = Console.ReadLine();
+            InsertionSort insertSort = new InsertionSort();
+            MergeSort mergeSort = new MergeSort();
 
-            if (Convert.ToInt32(input) == 1)
+            List<ISort> lstr_SortingStrategies = new List<ISort>();
 
-            {
+            // Add the algorithms to the list
+            lstr_SortingStrategies.Add(insertSort);
+            lstr_SortingStrategies.Add(mergeSort);
 
-                insertSort = new InsertionSort();
-
-                // Write the random array to the console
-                Console.WriteLine("Random Array:");
-                WriteArrayToConsole<int>(insertSort.intArrRandom);
-                
-                // Sort the array
-                insertSort.SortArray();
-
-                // Write the sorted array to the console
-                Console.WriteLine("Sorted Array:");
-                WriteArrayToConsole<int>(insertSort.intArrRandom);
-
-            }
-
-            else if (Convert.ToInt32(input) == 2)
+            // Create the directions for them
+            foreach(ISort algorithm in lstr_SortingStrategies)
 
             {
 
-                mergeSort = new MergeSort();
-
-                // Write the random array to the console
-                Console.WriteLine("Random Array:");
-                WriteArrayToConsole<int>(mergeSort.intArrRandom);
-                
-                // Sort the array
-                mergeSort.SortArray();
-
-                // Write the sorted array to the console
-                Console.WriteLine("Sorted Array:");
-                WriteArrayToConsole<int>(mergeSort.intArrRandom);
+                strDirections += string.Format("Press {0} for {1}.\r\n"
+                    , lstr_SortingStrategies.IndexOf(algorithm)
+                    , algorithm.Name);
 
             }
 
-            else
+            // Do the following at least once
+            do
 
             {
 
-                // exit
-                return;
+                // Wait for user to hit a key to continue
+                Console.WriteLine(strDirections);
+
+                strUserInput = Console.ReadLine();
+
+                bValidNumber = Int32.TryParse(strUserInput, out iSelectedAlgorithm);
+
+                // If it's a valid number, is greater than or equal to zero, and less than the total number of strategies
+                if (bValidNumber &&
+                   iSelectedAlgorithm >= 0 &&
+                   iSelectedAlgorithm < lstr_SortingStrategies.Count)
+
+                {
+
+                    // Get the selected algorithm
+                    sortSelected = lstr_SortingStrategies[Convert.ToInt32(iSelectedAlgorithm)];
+
+                    // Create the random values
+                    sortSelected.InitalizeArray();
+
+                    // Write the random array to the console
+                    Console.WriteLine("\r\nRandom Array:");
+                    WriteArrayToConsole<int>(sortSelected.intArrRandom);
+
+                    // Sort the array
+                    sortSelected.SortArray();
+
+                    // Write the sorted array to the console
+                    Console.WriteLine("\r\nSorted Array:");
+                    WriteArrayToConsole<int>(sortSelected.intArrRandom);
+
+                }
 
             }
 
-            // Wait for user to hit a key to continue
-            Console.WriteLine("Press enter to close this window.");
-
-            Console.ReadLine();
+            // While the user hasn't entered exit
+            while (!String.Equals(strUserInput, "exit", StringComparison.OrdinalIgnoreCase));
             
         }
 
@@ -87,12 +97,20 @@ namespace Algorithms
         {
 
             // for each object in the generic array
-            foreach (object intValue in genericArray)
+            for (int index = 0; index < genericArray.Count; index++)
 
             {
 
-                // write it's contents to the console
-                Console.WriteLine(intValue);
+                // If it's not the last item, or the only item, in the array then add a comma
+                if (index < genericArray.Count - 1 && 
+                    genericArray.Count > 1)
+
+                    Console.Write(string.Format("{0},", genericArray[index]));
+
+                // Otherwise it's either alone or at the end, so it needs no trailing comma
+                else
+
+                    Console.Write(genericArray[index]);
 
             }
             
