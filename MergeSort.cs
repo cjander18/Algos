@@ -11,6 +11,7 @@ namespace Algorithms
         public string Name { get; set; }
         public Random rand { get; set; }
         public int[] intArrRandom { get; set; }
+        public int[] intArrSorted { get; set; }
 
         /// <summary>
         /// Initalize a random array of random size
@@ -77,7 +78,7 @@ namespace Algorithms
             {
 
                 // Set the middle
-                iM = (iL + iR) / 2;
+                iM = GetMiddleValue(iL, iR);
 
                 // Start sorting this part of the array, looking only from the left to the middle
                 intArrSource = StartMergeSort(intArrSource, iL, iM);
@@ -91,6 +92,19 @@ namespace Algorithms
             }
 
             return intArrSource;
+
+        }
+
+        /// <summary>
+        /// Get the middle value of two numbers (i.e. the left and right values)
+        /// </summary>
+        /// <param name="intL"></param>
+        /// <param name="intR"></param>
+        /// <returns></returns>
+        public int GetMiddleValue(int intL, int intR)
+        {
+
+            return ((intL + intR) / 2);
 
         }
 
@@ -122,27 +136,12 @@ namespace Algorithms
             int[] arrLeft = new int[iLeftLength];
             int[] arrRight = new int[iRightLength];
 
-            // Copy data from the source into the Left and Right arrays
-            for(iLeftCounter = 0; iLeftCounter < iLeftLength; iLeftCounter++)
-
-            {
-
-                // Note in the merged array we're looking to go from the start of the left
-                // side up to the end of the left array (i.e. iLeftCounter < iLeftLength) 
-                arrLeft[iLeftCounter] = arrMerged[iL + iLeftCounter];
-            }
-
-
-            for (iRightCounter = 0; iRightCounter < iRightLength; iRightCounter++)
-
-            {
-
-                // Note we're doing the same thing here, going from the middle (+1) to
-                // the end of the right array
-                arrRight[iRightCounter] = arrMerged[iM + 1 + iRightCounter];
-
-            }
-
+            // Get the left subarray
+            arrLeft = GetArraySubset(arrMerged, iL, iLeftLength, true);
+            
+            // Get the right subarray
+            arrRight = GetArraySubset(arrMerged, iM, iRightLength, false);
+            
             // Re-initialize the counters to zero
             iLeftCounter = 0;
             iRightCounter = 0;
@@ -180,33 +179,57 @@ namespace Algorithms
                 iMergedCounter++;
 
             }
-            
-            // Notice that due to the above while loop's condition, only one of the below while 
-            // loops will execute.
+
+            // Due to the above while loop's condition, only one of the below functions
+            // will actually update the arrMerged variable.
 
             // If there are any items left in the left array then merge them into the merged array
-            while(iLeftCounter < iLeftLength)
-
-            {
-
-                arrMerged[iMergedCounter] = arrLeft[iLeftCounter];
-                iLeftCounter++;
-                iMergedCounter++;
-
-            }
+            arrMerged = MergeSubArray(iLeftCounter, iMergedCounter, arrLeft, arrMerged);
 
             // If there are any items left in the right array then merge them into the merged array
-            while (iRightCounter < iRightLength)
+            arrMerged = MergeSubArray(iRightCounter, iMergedCounter, arrRight, arrMerged);
+            
+            return arrMerged;
+
+        }
+
+        public int[] GetArraySubset(int[] intArrSource, int intStartIndex, int intNewArrLength, bool bZeroBased)
+        {
+
+            int iCounter;
+            int[] intArrSubset = new int[intNewArrLength];
+
+            // Copy data from the source into the Left and Right arrays
+            for (iCounter = 0; iCounter < intNewArrLength; iCounter++)
 
             {
 
-                arrMerged[iMergedCounter] = arrRight[iRightCounter];
-                iRightCounter++;
-                iMergedCounter++;
+                // If this is a zero based subset, just add the start index to the counter
+                // If this is not a zero based subet, then we need to add one
+                intArrSubset[iCounter] = bZeroBased ?
+                    intArrSource[intStartIndex + iCounter] : intArrSource[intStartIndex + iCounter + 1];
 
             }
 
-            return arrMerged;
+            return intArrSubset;
+
+        }
+
+        public int[] MergeSubArray(int intSubArrayStart, int intMergeIndex, int[] intArrSubArray, int[] intMergeArray)
+
+        {
+
+            while (intSubArrayStart < intArrSubArray.Length)
+
+            {
+
+                intMergeArray[intMergeIndex] = intArrSubArray[intSubArrayStart];
+                intSubArrayStart++;
+                intMergeIndex++;
+
+            }
+
+            return intMergeArray;
 
         }
 

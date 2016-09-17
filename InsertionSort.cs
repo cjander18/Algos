@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Algorithms
 
@@ -24,18 +21,7 @@ namespace Algorithms
             Name = "Insertion Sort";
 
             rand = new Random();
-
-            // Create an array with a random length
-            intArrRandom = new int[rand.Next(0, 100)];
-
-            // For each place in the array
-            for (int i = 0; i < intArrRandom.Count(); i++)
-
-            {
-                // Put a random number in it
-                intArrRandom[i] = rand.Next(0, 100);
-            }
-
+            
         }
 
         /// <summary>

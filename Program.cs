@@ -18,6 +18,7 @@ namespace Algorithms
             int iSelectedAlgorithm;
             bool bValidNumber;
 
+            // Will hold the algorithm the user chooses to use
             ISort sortSelected;
 
             InsertionSort insertSort = new InsertionSort();
